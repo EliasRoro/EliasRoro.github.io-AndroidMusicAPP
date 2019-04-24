@@ -1,0 +1,538 @@
+<!--
+PROG3185 - Programming: Mobile Application 1
+Assignment 3
+Created by: Elias Roro (March, 2019)
+email:      eroro6882@conestogac.on.ca
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Elias Music App</title>
+        <!--jQuery-->
+        <script src="js/lib/jquery-2.1.4.js"></script>
+        <!--jQuery Mobile-->
+        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+        <!--jQuery Validator-->
+        <script src="js/lib/jquery.validate.js"></script>
+        <!--jQuery Mobile stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+        <!--our script files-->
+        <script src="js/ERdatabase.js"></script>
+        <script src="js/ERfeedbackDAL.js"></script>
+        <script src="js/ERfacade.js"></script>
+        <script src="js/ERutil.js"></script>
+        <script src="js/ERglobal.js"></script>
+        <!--our stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    </head>
+    <body>
+        <!--Home page-->
+        <div id="ERAboutPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>About Page</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a" class="ui-btn-active ui-state-persist">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <ul>
+                    <li>Welcome to El Music App</li>
+                    <li data-icon="content"></li>
+                    <li>Things You can do On This App</li>
+                    <li> Reading the ABOUT page </li>
+                    <li> Listening my songs on the MUSIC Page</li>
+                    <li> Adding your Feedback On my Songs</li>
+                    <li> Checking your feedback, update delete or cancel</li>
+                    <li>Contacting Me by using the Contact page</li>
+                </ul>
+                <p align="center"><img src="img/Music.jpg" width="100%" height="100%" alt="Avengers"></p>
+                <p>Please feel free to contact me if you have any suggestions!</p>
+                <p>The Music App is built depending on the hands on Examples and Class Assignments</p>
+                <p>The Hands on Practice is Designed by Professor Sabbir Ahmed.</p>
+                <p>This is my Album, and all songs are in Ethiopian national language (Amharic)</p>
+                <p>Ethiopia Is Located in The eastern Africa</p>
+                <p> you can click the Button below to see where Ethiopia is Located</p>
+                <p> Please listen to my Album and Give me a feedback, Thank you</p>
+                <h3> Elias Roro</h3>
+
+                <button class="btn2" onclick="javascript:initMap()" >Ethiopia Map</button>
+                <section data-role="content">
+                    <div id="map"></div>
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxNfGn2EAv1efnOJZ5f0CS0Lcgu6sVps4&libraries=places"></script>
+                </section>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> Copyright &copy; Elias Roro </h1>
+            </footer>
+        </div>
+
+
+
+        <!--Music page-->
+
+
+        <div id="pageMusic" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Music</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a" class="ui-btn-active ui-state-persist">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a" class="ui-btn ui-icon-phone">Contact Us</a></li>
+
+                    </ul>
+
+                </div>
+            </header>
+
+
+            <!--htm code for music player-->
+
+            <div id="bg">
+                <div id="blackLayer"></div>
+                <img src="img/poster1.jpg" alt="poster"/>
+            </div>
+
+            <div id="main">
+                <div id="image">
+                    <img src="img/poster1.jpg" alt="poster"/>
+                </div>
+
+                <div id="player">
+                    <div id="songTitle">Demo</div>
+                    <div id="buttons">
+                        <button id="pre" onclick="pre()"><img src="img/Pre.png" height="100%" width="100%" /></button>
+                        <button id="play" onclick="playOrPauseSong()"><img src="img/pause.png" alt="play"/></button>
+                        <button id="next" onclick="next()"><img src="img/Next.png" height="100%" width="100%" /></button>
+                    </div>
+
+                    <div id="seek-bar">
+                        <div id="fill"></div>
+                        <div id="handle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <footer data-role="footer" data-position="fixed" style="background-color: #2a2a2a">
+                <h3>Copyright &copy; Elias Roro</h3>
+            </footer>
+
+        </div>
+
+
+
+
+
+        <!--Add Feedback page-->
+        <div id="ERAddReviewPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Add your Review</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a" class="ui-btn-active ui-state-persist">Add</a>
+                        </li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a" class="ui-btn ui-icon-phone">Contact</a></li>
+
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="ERAddForm" name="ERAddForm">
+                    <label for="ERUserName">Enter Name:</label>
+                    <input type="text" id="ERUserName" name="ERUserName" value="">
+                    <label for="ERType">Gender:</label>
+                    <select data-role="" id="ERType" name="ERType">
+
+                    </select>
+                    <label for="ERReviewerEmail">Reviewer Email:</label>
+                    <input type="text" id="ERReviewerEmail" name="ERReviewerEmail" value="">
+                    <label for="ERReviewerComments">Reviewer Comments:</label>
+                    <textarea id="ERReviewerComments" name="ERReviewerComments"></textarea>
+                    <label for="ERReviewDate">Review Date</label>
+                    <input type="date" id="ERReviewDate" name="ERReviewDate">
+                    <!-- <label for="ERRating">Do you want to add your rating?</label> -->
+                    <!-- <input id="ERRating" name="ERRating" type="checkbox"> -->
+                    <!-- <div id="ERRatingsValue"> -->
+                    <!-- <label for="ERFoodQuality">Food Quality (0-5):</label> -->
+                    <!-- <input type="number" id="ERFoodQuality" name="ERFoodQuality" value="" placeholder="0"> -->
+                    <!-- <label for="ERService">Service (0-5):</label> -->
+                    <!-- <input type="number" id="ERService" name="ERService" value="" placeholder="0"> -->
+                    <!-- <label for="ERValue">Value (0-5):</label> -->
+                    <!-- <input type="number" id="ERValue" name="ERValue" value="" placeholder="0"> -->
+                    <!-- <label for="EROverallRating">Overall Rating (Calculated):</label> -->
+                    <!-- <input  type="text" id="EROverallRating" name="EROverallRating" value="" placeholder="0" disabled="disabled" readonly> -->
+                    <!-- </div> -->
+                    <button type="submit" id="ERBtnSave" name="ERBtnSave" data-inline="true" class="ui-btn-active ui-state-persist">Save</button>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> Copyright &copy; Elias Roro </h1>
+            </footer>
+        </div>
+
+        <!--List of Reviews page-->
+        <div id="ERReviewList" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>List of Reviews</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a"
+                               class="ui-btn-active ui-state-persist">Reviews</a>
+                        </li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a" class="ui-btn ui-icon-phone">Contact Us</a></li>
+
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <div data-role="controlgroup">
+                    <ul data-role="listview" data-inset="true" id="ERListView">
+
+                    </ul>
+                </div>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> Copyright &copy; Elias Roro </h1>
+            </footer>
+        </div>
+
+        <!--Settings page-->
+        <div id="ERSettingsPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Contact Me</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a">Add</a></li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a">Reviews</a></li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a" class="ui-btn ui-icon-phone">Contact</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="ERSettingsForm" name="ERSettingsForm">
+                    <h2>Contact Me</h2>
+                    <h2>Phone and Email</h2>
+                    <h1><a href="tel:1-226-600-6986" data-role="button" style="background-color: black; color: lime; text-shadow: 0 0;">Call: 226.600.6986</a></h1>
+                    <br>
+                    <h1><a href="mailto:eroro6882@conestogac.on.ca" data-role="button" style="background-color: black; color: lime; text-shadow: 0 0;">eroro6882@conestogac.on.ca</a></h1>
+
+                    <br>
+                    <br>
+
+                    <button type="button" id="ERBtnClearDatabase" name="ERBtnClearDatabase"
+                            style="background-color: red; color: white; text-shadow: 0 0">Clear Database
+                    </button>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> Copyright &copy; Elias Roro </h1>
+            </footer>
+        </div>
+
+        <!--Modify Feedback page-->
+        <div id="EREditFeedbackPage" data-role="page">
+            <header data-role="header" data-theme="b" data-position="fixed">
+                <h1>Modify Feedback</h1>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li><a href="#ERAboutPage" data-icon="home" data-theme="a">About</a></li>
+                        <li><a href="#pageMusic" data-icon="audio" data-theme="a">Music</a></li>
+                        <li><a href="#ERAddReviewPage" data-icon="plus" data-theme="a">Add List</a></li>
+                        <li><a href="#ERReviewList" data-icon="grid" data-theme="a"
+                               class="ui-btn-active ui-state-persist">Reviews</a>
+                        </li>
+                        <li><a href="#ERSettingsPage" data-icon="gear" data-theme="a">Contact</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section data-role="content">
+                <form id="EREditForm" name="EREditForm">
+                    <label for="EREditUserName">Enter Name:</label>
+                    <input type="text" id="EREditUserName" name="EREditUserName" value="">
+                    <label for="EREditType">Gender:</label>
+                    <select data-role="" id="EREditType" name="EREditType">
+                        <option id="EREditOther" name="EREditOther" value="1">Other</option>
+                        <option id="EREditFemale"  name="EREditFemale" value="2">Female</option>
+                        <option id="EREditMale" name="EREditMale" value="3">Male</option>
+                    </select>
+                    <label for="EREditReviewerEmail">Reviewer Email:</label>
+                    <input type="text" id="EREditReviewerEmail" name="EREditReviewerEmail" value="">
+                    <label for="EREditReviewerComments">Reviewer Comments:</label>
+                    <textarea id="EREditReviewerComments" name="EREditReviewerComments"></textarea>
+                    <label for="EREditReviewDate">Review Date</label>
+                    <input type="date" id="EREditReviewDate" name="EREditReviewDate">
+                    <!-- <label for="EREditRating" id="EREditRatingLabel">Do you want to add your rating?</label> -->
+                    <!-- <input id="EREditRating" name="EREditRating" type="checkbox"> -->
+                    <!-- <div id="EREditRatingsValue"> -->
+                    <!-- <label for="EREditRating">Food Quality (0-5):</label> -->
+                    <!-- <input type="number" id="EREditRating" name="EREditRating" value="" placeholder="0"> -->
+                    <!-- <label for="EREditService">Service (0-5):</label> -->
+                    <!-- <input type="number" id="EREditService" name="EREditService" value="" placeholder="0"> -->
+                    <!-- <label for="EREditValue">Value (0-5):</label> -->
+                    <!-- <input type="number" id="EREditValue" name="EREditValue" value="" placeholder="0"> -->
+                    <!-- <label for="EREditOverallRating">Overall Rating (Calculated):</label> -->
+                    <!-- <input  type="text" id="EREditOverallRating" name="EREditOverallRating" value="" placeholder="0" disabled="disabled" readonly> -->
+                    <!-- </div> -->
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <button type="button" id="ERBtnCancel" name="ERBtnCancel" style="background-color: yellow; color: black; text-shadow: 0 0;"> Cancel</button>
+                        <button type="button" id="ERBtnDelete" name="ERBtnDelete" data-theme="b"> Delete</button>
+                        <button type="button" id="ERBtnUpdate" name="ERBtnUpdate" class="ui-btn-active ui-state-persist"> Update</button>
+                    </fieldset>
+                </form>
+            </section>
+            <footer data-role="footer" data-theme="b" data-position="fixed">
+                <h1> Copyright &copy; Elias Roro </h1>
+            </footer>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var songs = ["01 Agelgay.mp3","02 Atimotim.mp3","03 Lamesginew.mp3","04 Fiker Yshenefal.mp3",
+            "05 Beka.mp3","06 Kahene.mp3","07 Hiwoten.mp3","08 Sew Sewen.mp3","09 Saychelem.mp3",
+            "10 Atimotim.mp3","11 Yemihereth Bizat.mp3","12 Yigermal Medane.mp3","13 Getegnawen Libs.mp3",
+            "14 Alebign Weletaw.mp3"];
+        var poster = ["poster1.jpg","poster2.jpg","poster3.jpg","poster4.jpg","poster5.jpg",
+            "poster6.jpg","poster7.jpg","poster8.jpg","poster9.jpg","poster10.jpg","poster11.jpg",
+            "poster12.jpg","poster13.jpg","poster14.jpg"];
+
+        var songTitle = document.getElementById("songTitle");
+        var fillBar = document.getElementById("fill");
+
+        var song = new Audio();
+        var currentSong = 0;    // it point to the current song
+
+        window.onload = playSong;   // it will call the function playSong when window is load
+
+        function playSong(){
+
+            song.src = songs[currentSong];  //set the source of 0th song
+
+            songTitle.textContent = songs[currentSong];
+            // set the title of song
+
+            <!-- song.play(); -->
+
+            // play the song
+        }
+
+        function playOrPauseSong(){
+
+            if(song.paused){
+                song.play();
+                $("#play img").attr("src","img/Pause.png");
+            }
+            else{
+                song.pause();
+                $("#play img").attr("src","img/Play.png");
+            }
+        }
+
+        song.addEventListener('timeupdate',function(){
+
+            var position = song.currentTime / song.duration;
+
+            fillBar.style.width = position * 100 +'%';
+        });
+
+
+        function next(){
+
+            currentSong++;
+            if(currentSong > 14){
+                currentSong = 0;
+            }
+            playSong();
+            $("#play img").attr("src","img/Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+
+        function pre(){
+
+            currentSong--;
+            if(currentSong < 0){
+                currentSong = 14;
+            }
+            playSong();
+            $("#play img").attr("src","img/Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+
+
+
+
+
+        var initMap = function () {
+
+            var cords = {lat: 9.005401, lng: 38.763611};
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: cords,
+                zoomControl:true,
+                zoom: 5,
+                maxZoom:100,
+                minZoom:1,
+                mapTypeControl: false,
+                streetViewControl: true,
+                scaleControl: true,
+                scrollwheel:false,
+                fullscreenControl:false,
+                styles: [
+                    {
+                        featureType: 'poi.business',
+                        elementType: 'labels',
+                        stylers: [
+                            { visibility: 'off' }
+                        ]
+                    }
+                ]
+            });
+
+            var location = new google.maps.Marker({
+                position: cords,
+                map: map,
+                icon: 'https://www.rit.tafensw.edu.au/content/images/map-marker-orange.png'
+            });
+
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: cords,
+                radius: 500,
+                type: ['food']
+            });
+
+            google.maps.event.addListener(location, 'click', function() {
+                infowindow.setContent("Iron Works Apartments");
+                infowindow.open(map, this);
+            });
+
+        }
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                icon: 'http://iwx.aerisapi.com/v1.6/wnmapapp/css/assets/markers/map_marker_point_red.png'
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+        var initMap = function () {
+
+            var cords = {lat: 9.005401, lng: 38.763611};
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: cords,
+                zoomControl:true,
+                zoom: 5,
+                maxZoom:100,
+                minZoom:1,
+                mapTypeControl: false,
+                streetViewControl: true,
+                scaleControl: true,
+                scrollwheel:false,
+                fullscreenControl:false,
+                styles: [
+                    {
+                        featureType: 'poi.business',
+                        elementType: 'labels',
+                        stylers: [
+                            { visibility: 'off' }
+                        ]
+                    }
+                ]
+            });
+
+            var location = new google.maps.Marker({
+                position: cords,
+                map: map,
+                icon: 'https://www.rit.tafensw.edu.au/content/images/map-marker-orange.png'
+            });
+
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: cords,
+                radius: 500,
+                type: ['food']
+            });
+
+            google.maps.event.addListener(location, 'click', function() {
+                infowindow.setContent("Iron Works Apartments");
+                infowindow.open(map, this);
+            });
+
+        }
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                icon: 'http://iwx.aerisapi.com/v1.6/wnmapapp/css/assets/markers/map_marker_point_red.png'
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+
+
+
+
+    </script>
+
+
+</html>
